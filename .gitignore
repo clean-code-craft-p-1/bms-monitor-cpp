@@ -1,1 +1,3 @@
-testchecker
+build/
+coverage.*
+.vs/
