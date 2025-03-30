@@ -25,10 +25,11 @@ jobs:
       run: |
         cpplint  --filter=-legal,-build/c++17 --linelength=100 *.cpp *.h
 
-    - name: clang-format
-      run: |
-        find . -name "*.cpp" -o -name "*.hpp" -o -name "*.cc" -o -name "*.h" | grep -v "build/" | xargs -I{} clang-tidy {} -- -std=c++17
-
     - name: cppcheck
       run: |
         cppcheck --enable=all --suppress=missingIncludeSystem --std=c++17  .
+
+    - name: clang-format
+      run: |
+        cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
+        find . -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | grep -v "build/" | xargs -I{} clang-tidy -p=. {}
