@@ -1,6 +1,6 @@
 #include "./monitor.h"
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 TEST(Monitor, NotOkWhenAnyVitalIsOffRange) {
   ASSERT_FALSE(vitalsOk(99, 102, 70));
