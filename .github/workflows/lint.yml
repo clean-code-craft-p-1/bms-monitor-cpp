@@ -20,6 +20,7 @@ jobs:
         pip install cpplint
         sudo apt-get install -y clang-tidy
         sudo apt-get install -y cppcheck
+        cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
 
     - name: cpplint
       run: |
@@ -31,5 +32,4 @@ jobs:
 
     - name: clang-format
       run: |
-        cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
-        find . -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | grep -v "build/" | xargs -I{} clang-tidy -p=. {}
+        clang-tidy -p=. *.cpp *.h
